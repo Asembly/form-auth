@@ -1,9 +1,9 @@
+import { headers } from "next/dist/client/components/headers"
 import { NextResponse } from "next/server"
 
 
-export async function GET(res: Response) {
-  const access_token = res.headers.get('authorization')
-  console.log(access_token)
+export async function GET(req: Request, res: Response) {
+  const access_token = headers().get("authorization")
 
   const options = {
     method: 'GET',

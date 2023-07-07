@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { User } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { cookies } from "next/dist/client/components/headers"
 var jwt = require('jsonwebtoken')
@@ -23,7 +23,7 @@ const handler = NextAuth({
         if (user && result.ok) {
           const token = jwt.verify(user.access_token, process.env.NEXT_JWT_SECRET)
           cookies().set('Bearer', user.access_token)
-          return { login: token.login, email: token.email }
+          return { id: token.id, login: token.login, email: token.email } as User
         } else {
           alert('User not authorized')
         }

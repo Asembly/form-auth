@@ -2,8 +2,7 @@ import { cookies } from "next/dist/client/components/headers";
 import { UserItem } from "./UserItem";
 import styles from "../../../styles/form/users/UserList.module.scss"
 
-async function getData() {
-
+export async function getStaticProps() {
   const token = 'Bearer ' + cookies().get('Bearer')?.value
   console.log(cookies())
 
@@ -14,11 +13,11 @@ async function getData() {
     },
   })
   const data = await users.json().catch(error => console.log(error))
-  return data;
+  return { props: { data } };
 }
 
-async function UserList() {
-  const users = await getData()
+async function UserList(props) {
+  const users = props.data || []
 
   return (
     <>
