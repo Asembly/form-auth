@@ -1,7 +1,7 @@
+import { Footer } from '@/components/form/Footer'
 import './globals.css'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Header } from '@/components/form/Header'
+import { Provider } from '@/components/form/Provider'
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +15,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <Provider>
+          <Header />
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", overflow: "auto" }}>
+            {children}
+          </div>
+          <Footer />
+        </Provider>
+      </body>
     </html>
   )
 }
